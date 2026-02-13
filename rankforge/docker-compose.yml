@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: rankforge
+      POSTGRES_PASSWORD: rankforge_dev_password
+      POSTGRES_DB: rankforge
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://rankforge:rankforge_dev_password@db:5432/rankforge
+    env_file:
+      - .env.local
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
