@@ -1,36 +1,72 @@
-# Lattice
+# Cartographer
 
-A reactive computation engine in Python. Define named cells with values or
-formulas, and when you update a value, all downstream dependents automatically
-recompute.
+Scan a codebase and generate a structured project map — the kind of context
+an AI coding assistant (or a new team member) needs to start working
+effectively.
 
-```python
-from lattice import Notebook
+```
+$ cartographer /path/to/project
 
-nb = Notebook()
-nb["price"] = 100
-nb["tax_rate"] = 0.08
-nb.formula("total", lambda ctx: ctx["price"] * (1 + ctx["tax_rate"]))
+# Project Map: myapp
 
-print(nb["total"])   # 108.0
-nb["tax_rate"] = 0.10
-print(nb["total"])   # 110.0
+## Overview
+- Languages: Python
+- Frameworks: FastAPI
+- Package manager: pip
+- Files: 47
+- Lines of code: 3,212
+
+## Commands
+Build  pip install -e .
+Test   pytest
+Lint   ruff check .
+
+## Directory Structure
+...
+
+## Architecture
+### myapp/
+- __init__.py — exports: create_app
+- api.py — classes: Router — functions: health_check, get_users
+- models.py — classes: User, Session
+...
 ```
 
-## Features
+## What it detects
 
-- **Reactive recomputation** — change a value and all formulas that depend on
-  it recompute automatically
-- **Automatic dependency tracking** — no need to declare deps; they're detected
-  at runtime when your formula accesses other cells
-- **Cycle detection** — raises `CycleError` if you create circular dependencies,
-  with rollback so the graph stays consistent
-- **Caching** — formula results are cached and only recomputed when dependencies
-  change
-- **Topological execution** — formulas evaluate in correct dependency order
-- **Bulk updates** — update many values at once with a single recomputation pass
-- **Serialization** — save/load notebooks to JSON
-- **Zero dependencies** — pure Python, no external packages required
+- **Languages:** Python, JavaScript/TypeScript, Rust, Go, Ruby
+- **Frameworks:** Django, Flask, FastAPI, React, Next.js, Vue, Svelte, Express, Rails
+- **Package managers:** pip, poetry, npm, yarn, pnpm, bun, cargo, bundler
+- **Commands:** build, test, lint, run — extracted from pyproject.toml, package.json, Cargo.toml, etc.
+- **CI/CD:** GitHub Actions, GitLab CI, CircleCI, Travis, Jenkins
+- **Code structure:** classes, functions, exports, imports, docstrings (via Python AST and JS regex)
+- **File organization:** directory tree, language breakdown by lines, test files, doc files
+
+## Usage
+
+```
+# Scan current directory
+cartographer
+
+# Scan a specific project
+cartographer /path/to/project
+
+# Write to file
+cartographer -o PROJECT_MAP.md
+
+# Skip line counting (faster for large repos)
+cartographer --no-line-count
+
+# Limit file count for huge repos
+cartographer --max-files 2000
+```
+
+## Why this exists
+
+Every time an AI assistant starts working in a new repo, it spends dozens of
+tool calls just figuring out the basics: what language, what framework, how to
+test, what the key modules are. Cartographer does that in one pass and produces
+a structured document that can be fed straight into context.
 
 ## Running tests
 
