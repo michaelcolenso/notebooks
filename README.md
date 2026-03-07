@@ -20,6 +20,19 @@ recurring customer problems.
 6. **Pre-sell + smallest useful version reminders** (`starter-pack`)
 7. **Data export** (`export-json`)
 
+### Practical skill for Codex
+
+This repository now includes a reusable local skill at:
+
+- `skills/problem-intelligence-operator/SKILL.md`
+
+Use it when you want a repeatable workflow for initialization, capture, clustering,
+and export. It also includes a deterministic demo script:
+
+```bash
+bash skills/problem-intelligence-operator/scripts/run_demo.sh
+```
+
 ### Quick start
 
 ```bash
