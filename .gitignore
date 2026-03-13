@@ -1,0 +1,31 @@
+# Backup files
+# Editor files
+# Local overrides
+# Logs
+# OS files
+# Python
+# Secrets (should never be committed)
+# Test artifacts
+*.backup
+*.bak
+*.key
+*.local
+*.local.md
+*.log
+*.pem
+*.pyc
+*.swo
+*.swp
+*~
+.DS_Store
+.env
+.env.*
+.idea/
+.pytest_cache/
+.venv/
+.vscode/
+/test/
+/tmp/
+Thumbs.db
+__pycache__/
+uv.lock
